@@ -26,12 +26,12 @@ export const LaunchCta: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap items-center gap-4 shrink-0"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0 w-full md:w-auto mt-6 md:mt-0"
         >
-          <a className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary text-xs uppercase tracking-widest font-bold hover:bg-gray-200 transition-colors rounded-none" href="#">
+          <a className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary text-xs uppercase tracking-widest font-bold hover:bg-gray-200 transition-colors rounded-none w-full sm:w-auto text-center" href="#">
             Launch Investigation Console →
           </a>
-          <a className="inline-flex items-center justify-center px-8 py-4 border border-gray-600 text-white text-xs uppercase tracking-widest font-bold hover:bg-white/10 transition-colors rounded-none" href="#">
+          <a className="inline-flex items-center justify-center px-8 py-4 border border-gray-600 text-white text-xs uppercase tracking-widest font-bold hover:bg-white/10 transition-colors rounded-none w-full sm:w-auto text-center" href="#">
             Schedule Operational Demo
           </a>
         </motion.div>

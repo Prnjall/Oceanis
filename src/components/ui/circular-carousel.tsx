@@ -61,8 +61,38 @@ const SLOT_STYLES: Record<number, SlotStyle> = {
   [3]:  { angleDeg: 0,   scale: 0.50, opacity: 0.0,  zIndex: 1 },    // back (hidden behind active)
 };
 
-function computePosition(slot: number, rX: number, rY: number) {
+function computePosition(slot: number, rX: number, rY: number, isMobile?: boolean, cardH?: number) {
   const style = SLOT_STYLES[slot] ?? SLOT_STYLES[3];
+  
+  if (isMobile && cardH) {
+    // Vertical arrangement on mobile: no overlapping, active card in center
+    // Inactive cards slide vertically out of bounds and are clipped by overflow-hidden
+    let y = 0;
+    let opacity = 0;
+    let scale = 0.9;
+    let zIndex = 1;
+
+    const offset = cardH + 40; // Ensure complete separation (no overlap)
+
+    if (slot === 0) { 
+      y = 0; opacity = 1; scale = 1; zIndex = 10; 
+    }
+    else if (slot === -1) { 
+      y = -offset; opacity = 0.3; scale = 0.95; zIndex = 5; 
+    }
+    else if (slot === 1) { 
+      y = offset; opacity = 0.3; scale = 0.95; zIndex = 5; 
+    }
+    else if (slot === -2) { 
+      y = -(offset * 2); opacity = 0; scale = 0.9; zIndex = 1;
+    }
+    else if (slot === 2) { 
+      y = (offset * 2); opacity = 0; scale = 0.9; zIndex = 1;
+    }
+
+    return { x: 0, y, scale, opacity, zIndex };
+  }
+
   const rad = (style.angleDeg * Math.PI) / 180;
   return {
     x: Math.sin(rad) * rX,
@@ -90,20 +120,21 @@ export function CircularCarousel({
 
   // ── Responsive dimensions ──────────────────────────────────────────────────
   const [dims, setDims] = useState({
-    rX: 620, rY: 100, cardW: 360, cardH: 220, trackH: 420,
+    rX: 620, rY: 100, cardW: 360, cardH: 220, trackH: 420, isMobile: false
   });
 
   useEffect(() => {
     const measure = () => {
       const vw = window.innerWidth;
-      if (vw < 640) {
-        setDims({ rX: 180, rY: 40, cardW: 220, cardH: 145, trackH: 220 });
+      if (vw < 768) {
+        // Vertical mobile layout (cards do not overlap, active is larger)
+        setDims({ rX: 0, rY: 0, cardW: Math.min(vw - 64, 340), cardH: 260, trackH: 300, isMobile: true });
       } else if (vw < 1024) {
-        setDims({ rX: 320, rY: 60, cardW: 260, cardH: 165, trackH: 280 });
+        setDims({ rX: 320, rY: 60, cardW: 260, cardH: 165, trackH: 280, isMobile: false });
       } else if (vw < 1440) {
-        setDims({ rX: 460, rY: 80, cardW: 300, cardH: 195, trackH: 360 });
+        setDims({ rX: 460, rY: 80, cardW: 300, cardH: 195, trackH: 360, isMobile: false });
       } else {
-        setDims({ rX: 620, rY: 100, cardW: 360, cardH: 220, trackH: 420 });
+        setDims({ rX: 620, rY: 100, cardW: 360, cardH: 220, trackH: 420, isMobile: false });
       }
     };
     measure();
@@ -171,7 +202,7 @@ export function CircularCarousel({
       >
         {items.map((item, i) => {
           const currentSlot = getSlot(i, activeIndex, total);
-          const pos = computePosition(currentSlot, dims.rX, dims.rY);
+          const pos = computePosition(currentSlot, dims.rX, dims.rY, dims.isMobile, dims.cardH);
           const isActive = currentSlot === 0;
 
           return (

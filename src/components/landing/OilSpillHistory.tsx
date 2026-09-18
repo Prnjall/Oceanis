@@ -200,7 +200,7 @@ export const OilSpillHistory: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="w-full lg:w-[70%] relative rounded-xl overflow-hidden border border-white/5 bg-black min-h-[450px]"
+          className="w-full lg:w-[70%] relative rounded-xl overflow-hidden border border-white/5 bg-black min-h-[350px] lg:min-h-[450px]"
         >
           {/* Region label */}
           <div className="absolute top-4 left-6 z-10 pointer-events-none">
