@@ -122,8 +122,8 @@ function OceanisCard({ item }: { item: OceanisCardItem }) {
   return (
     <li
       style={{
-        width: "clamp(320px, 28vw, 420px)",
-        minHeight: 480,
+        width: "clamp(260px, 75vw, 420px)",
+        minHeight: 400,
         flexShrink: 0,
         borderRadius: 14,
         overflow: "hidden",
@@ -140,7 +140,7 @@ function OceanisCard({ item }: { item: OceanisCardItem }) {
       <div
         style={{
           position: "relative",
-          height: 240,
+          height: 180,
           background: "#080808",
           flexShrink: 0,
           overflow: "hidden",
@@ -195,12 +195,12 @@ function OceanisCard({ item }: { item: OceanisCardItem }) {
       </div>
 
       {/* ── Content ─────────────────────────────────────────────────── */}
-      <div style={{ padding: "18px 22px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "16px 20px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
         {/* Year */}
         <p
           style={{
             fontFamily: "var(--font-mango, 'Bebas Neue', 'Impact', sans-serif)",
-            fontSize: 46,
+            fontSize: 38,
             lineHeight: 1,
             color: "#ffffff",
             letterSpacing: "0.02em",
@@ -213,7 +213,7 @@ function OceanisCard({ item }: { item: OceanisCardItem }) {
         {/* Title */}
         <h3
           style={{
-            fontSize: 17,
+            fontSize: 16,
             fontWeight: 700,
             color: "#f5f5f5",
             lineHeight: 1.3,

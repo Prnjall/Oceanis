@@ -29,18 +29,7 @@ export const ParallaxHeroImages = ({ images }: { images: string[] }) => {
     { bottom: "2%", right: "16%", width: "clamp(240px, 20vw, 340px)", depth: 35, delay: 0.6 },
   ];
 
-  // Mobile specific configuration (uses explicit pixels to sit perfectly within the Hero padding)
-  const mobileConfigs = [
-    // Top row (Below header ~100px, but far above text block which starts at 300px)
-    { top: "110px", left: "5%", width: "clamp(100px, 28vw, 150px)", depth: 10, delay: 0.1 },
-    { top: "140px", right: "3%", width: "clamp(110px, 30vw, 160px)", depth: 15, delay: 0.2 },
-    // Middle row (Sits in the upper part of the bottom padding, 180px below the CTA buttons)
-    { bottom: "160px", left: "3%", width: "clamp(105px, 28vw, 145px)", depth: 20, delay: 0.3 },
-    { bottom: "190px", right: "2%", width: "clamp(115px, 32vw, 155px)", depth: 8, delay: 0.4 },
-    // Bottom row (Near the bottom edge of the container, clustering with the middle row)
-    { bottom: "20px", left: "5%", width: "clamp(120px, 34vw, 165px)", depth: 15, delay: 0.5 },
-    { bottom: "50px", right: "4%", width: "clamp(100px, 28vw, 140px)", depth: 20, delay: 0.6 },
-  ];
+  // Mobile parallax removed — hidden completely via CSS
 
   return (
     <>
@@ -82,42 +71,6 @@ export const ParallaxHeroImages = ({ images }: { images: string[] }) => {
         })}
       </div>
 
-      {/* MOBILE WRAPPER (Visible only under md breakpoint) */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden block md:hidden">
-        {images.map((src, idx) => {
-          const config = mobileConfigs[idx % mobileConfigs.length];
-          return (
-            <motion.div
-              key={`mobile-${idx}`}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ 
-                opacity: 0.9,
-                scale: 1,
-                x: mousePosition.x * config.depth,
-                y: mousePosition.y * config.depth,
-              }}
-              transition={{
-                opacity: { duration: 1.2, delay: config.delay },
-                scale: { duration: 1.2, delay: config.delay },
-                x: { type: "spring", stiffness: 40, damping: 30 },
-                y: { type: "spring", stiffness: 40, damping: 30 },
-              }}
-              style={{
-                position: "absolute",
-                top: config.top,
-                left: config.left,
-                right: config.right,
-                bottom: config.bottom,
-                width: config.width,
-              }}
-              className="rounded-2xl overflow-hidden shadow-[0_0_15px_rgba(255,255,255,0.05),0_8px_32px_rgba(0,0,0,0.8)] border border-white/20"
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10" />
-              <img src={src} alt="Hero Parallax Element" className="w-full h-auto object-cover opacity-100" />
-            </motion.div>
-          );
-        })}
-      </div>
     </>
   );
 };

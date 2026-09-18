@@ -46,7 +46,7 @@ const stages = [
 
 export function OceanisMethodology() {
   return (
-    <section className="relative w-full bg-black text-white py-24 lg:py-32 border-t border-border-hairline-dark overflow-hidden">
+    <section className="relative w-full bg-black text-white py-16 lg:py-32 border-t border-border-hairline-dark overflow-hidden">
       {/* ── Aceternity Grid Background ── */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
@@ -70,7 +70,7 @@ export function OceanisMethodology() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-20"
+          className="max-w-3xl mb-12 lg:mb-20"
         >
           <p className="text-[11px] uppercase tracking-widest font-mono text-gray-500 font-semibold mb-4">
             OCEANIS METHODOLOGY
@@ -94,7 +94,7 @@ export function OceanisMethodology() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.45, delay: i * 0.04 }}
-                className="relative w-full md:pl-10 pb-16 last:pb-4"
+                className="relative w-full md:pl-10 pb-10 lg:pb-16 last:pb-4"
               >
                 {/*
                   Beacon Dot sits directly on the beam spine (left: 10px).
@@ -137,7 +137,7 @@ export function OceanisMethodology() {
 
                 {/* Thin hairline between stages */}
                 {i < stages.length - 1 && (
-                  <div className="mt-14 border-t border-white/[0.04]" />
+                  <div className="mt-8 lg:mt-14 border-t border-white/[0.04]" />
                 )}
               </motion.div>
             ))}

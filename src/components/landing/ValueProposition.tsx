@@ -43,7 +43,7 @@ export const ValueProposition: React.FC = () => {
   ];
 
   return (
-    <section className="w-full bg-transparent text-white py-20 lg:py-28" id="how-it-works">
+    <section className="w-full bg-transparent text-white py-16 lg:py-28" id="how-it-works">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
         
         {/* The Problem */}
@@ -52,7 +52,7 @@ export const ValueProposition: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-24 [text-shadow:_0_1px_3px_rgba(0,0,0,0.8)]"
+          className="max-w-3xl mb-16 lg:mb-24 [text-shadow:_0_1px_3px_rgba(0,0,0,0.8)]"
         >
           <p className="text-[11px] uppercase tracking-widest font-mono text-accent-blue font-semibold mb-3">
             THE CHALLENGE
@@ -66,7 +66,7 @@ export const ValueProposition: React.FC = () => {
         </motion.div>
 
         {/* What OCEANIS Does */}
-        <div className="border-t border-white/10 pt-16 pb-8">
+        <div className="border-t border-white/10 pt-12 lg:pt-16 pb-4 lg:pb-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

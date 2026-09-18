@@ -152,7 +152,7 @@ export const OilSpillHistory: React.FC = () => {
 
   return (
     <section
-      className="relative w-full bg-black text-white py-24 lg:py-32 border-t border-border-hairline-dark overflow-hidden"
+      className="relative w-full bg-black text-white py-16 lg:py-32 border-t border-border-hairline-dark overflow-hidden"
       id="oil-spill-history"
     >
       {/* ── Aceternity Grid Background ── */}

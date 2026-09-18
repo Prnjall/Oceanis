@@ -13,11 +13,11 @@ const images = [
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative flex w-full items-center justify-center overflow-hidden pt-[300px] pb-[340px] md:pt-0 md:pb-0 md:min-h-screen" id="overview">
+    <section className="relative flex w-full items-center justify-center overflow-hidden py-32 lg:py-0 min-h-[75vh] md:min-h-screen" id="overview">
       <ParallaxHeroImages images={images} />
 
       {/* Main Hero Text Content — CENTERED */}
-      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-4 px-4 text-center mt-12">
+      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-4 px-4 text-center mt-20 md:mt-12">
         <motion.div 
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
