@@ -13,7 +13,7 @@ const images = [
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden" id="overview">
+    <section className="relative flex min-h-[85svh] md:min-h-screen w-full items-center justify-center overflow-hidden py-24 md:py-0" id="overview">
       <ParallaxHeroImages images={images} />
 
       {/* Main Hero Text Content — CENTERED */}
