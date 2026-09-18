@@ -14,6 +14,15 @@ const images = [
 export const Hero: React.FC = () => {
   return (
     <section className="relative flex w-full items-center justify-center overflow-hidden py-32 lg:py-0 min-h-[75vh] md:min-h-screen" id="overview">
+      {/* Mobile-only Background Image with dark overlay */}
+      <div className="absolute inset-0 z-0 block md:hidden">
+        <div 
+          className="absolute inset-0 bg-[url('/hero/mobile-hero-bg.jpg')] bg-cover bg-center bg-no-repeat"
+        />
+        {/* Cinematic dark treatment for readability */}
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
       <ParallaxHeroImages images={images} />
 
       {/* Main Hero Text Content — CENTERED */}
