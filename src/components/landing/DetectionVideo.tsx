@@ -1,8 +1,19 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
 import spillVideo from '../../images/Oil spill video.mp4';
 
 export const DetectionVideo: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(videoRef, { margin: "200px" });
+
+  useEffect(() => {
+    if (isInView && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    } else if (!isInView && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
+
   return (
     <section className="relative w-full bg-transparent text-white py-16 lg:py-24" id="detection-video">
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12">
@@ -17,10 +28,11 @@ export const DetectionVideo: React.FC = () => {
             className="w-full relative bg-gray-950 overflow-hidden shadow-2xl border border-white/10"
           >
             <video 
-              autoPlay 
+              ref={videoRef}
               loop 
               muted 
               playsInline
+              preload="metadata"
               className="w-full h-auto object-cover block"
             >
               <source src={spillVideo} type="video/mp4" />

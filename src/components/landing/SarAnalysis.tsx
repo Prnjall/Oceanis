@@ -1,9 +1,20 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
 import highlightVideo from '../../images/Oil-Spill-highlight-bw.mp4';
 import highlightPoster from '../../images/Oil-spill-monitoring_01_comparison-slider-bw.webp';
 
 export const SarAnalysis: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(videoRef, { margin: "200px" });
+
+  useEffect(() => {
+    if (isInView && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    } else if (!isInView && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
+
   return (
     <section className="relative w-full bg-transparent text-white py-16 lg:py-24" id="satellite-data">
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12">
@@ -75,10 +86,11 @@ export const SarAnalysis: React.FC = () => {
             className="w-full relative bg-gray-950 overflow-hidden shadow-2xl border border-white/10"
           >
             <video 
-              autoPlay 
+              ref={videoRef}
               loop 
               muted 
               playsInline
+              preload="metadata"
               poster={highlightPoster}
               className="w-full h-auto object-cover block"
             >
