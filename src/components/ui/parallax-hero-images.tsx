@@ -29,17 +29,17 @@ export const ParallaxHeroImages = ({ images }: { images: string[] }) => {
     { bottom: "2%", right: "16%", width: "clamp(240px, 20vw, 340px)", depth: 35, delay: 0.6 },
   ];
 
-  // Mobile specific configuration (vertical cluster, kept out of center text zone)
+  // Mobile specific configuration (uses explicit pixels to sit perfectly within the Hero padding)
   const mobileConfigs = [
-    // Top row (below header, framing top of text)
-    { top: "12%", left: "5%", width: "clamp(100px, 26vw, 140px)", depth: 10, delay: 0.1 },
-    { top: "15%", right: "4%", width: "clamp(110px, 28vw, 150px)", depth: 15, delay: 0.2 },
-    // Middle row (moved down to clear CTA buttons entirely, e.g. bottom 16-20%)
-    { bottom: "16%", left: "4%", width: "clamp(100px, 26vw, 140px)", depth: 20, delay: 0.3 },
-    { bottom: "19%", right: "3%", width: "clamp(105px, 28vw, 145px)", depth: 8, delay: 0.4 },
-    // Bottom row (framing the very bottom edge, tight with middle row)
-    { bottom: "2%", left: "7%", width: "clamp(115px, 30vw, 155px)", depth: 15, delay: 0.5 },
-    { bottom: "5%", right: "6%", width: "clamp(95px, 25vw, 135px)", depth: 20, delay: 0.6 },
+    // Top row (Below header ~100px, but far above text block which starts at 300px)
+    { top: "110px", left: "5%", width: "clamp(100px, 28vw, 150px)", depth: 10, delay: 0.1 },
+    { top: "140px", right: "3%", width: "clamp(110px, 30vw, 160px)", depth: 15, delay: 0.2 },
+    // Middle row (Sits in the upper part of the bottom padding, 180px below the CTA buttons)
+    { bottom: "160px", left: "3%", width: "clamp(105px, 28vw, 145px)", depth: 20, delay: 0.3 },
+    { bottom: "190px", right: "2%", width: "clamp(115px, 32vw, 155px)", depth: 8, delay: 0.4 },
+    // Bottom row (Near the bottom edge of the container, clustering with the middle row)
+    { bottom: "20px", left: "5%", width: "clamp(120px, 34vw, 165px)", depth: 15, delay: 0.5 },
+    { bottom: "50px", right: "4%", width: "clamp(100px, 28vw, 140px)", depth: 20, delay: 0.6 },
   ];
 
   return (

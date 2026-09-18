@@ -6,9 +6,7 @@
 @font-face {
   font-family: 'Mango Grotesque';
   src: local('Mango Grotesque'), 
-       local('MangoGrotesque-Regular'),
-       url('/assets/fonts/MangoGrotesque.woff2') format('woff2'),
-       url('/assets/fonts/MangoGrotesque.ttf') format('truetype');
+       local('MangoGrotesque-Regular');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
