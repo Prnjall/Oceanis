@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARGUS — Oil Spill Forensic Attribution &amp; Satellite SAR Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#000000",
+            "on-primary": "#ffffff",
+            "surface": "#ffffff",
+            "surface-subtle": "#f7f8f9",
+            "surface-container": "#edeef0",
+            "text-main": "#0f172a",
+            "text-muted": "#556070",
+            "dark-bg": "#0a1118",
+            "border-light": "#e2e5e9",
+            "accent-blue": "#0284c7"
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"Space Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-white text-text-main antialiased selection:bg-black selection:text-white">
+<!-- 1. HEADER & TOP NAV (ICEYE EXACT MINIMALIST AESTHETIC) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-black/80 via-black/40 to-transparent backdrop-blur-sm transition-all duration-300">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+<!-- Wordmark -->
+<div class="flex items-center gap-6">
+<a class="flex flex-col tracking-tight text-white group" href="#">
+<span class="text-2xl font-bold tracking-widest leading-none font-sans">ARGUS</span>
+<span class="text-[9px] tracking-[0.25em] text-gray-300 font-medium uppercase mt-1">Earth Observation &amp; Maritime</span>
+</a>
+<!-- In-header subcategory pills (matching ICEYE subnav) -->
+<nav class="hidden 2xl:flex items-center gap-6 ml-8 text-xs tracking-wide text-gray-300">
+<a class="hover:text-white transition-colors" href="#">Border</a>
+<a class="hover:text-white transition-colors" href="#">Site activity</a>
+<a class="hover:text-white transition-colors" href="#">Port</a>
+<a class="hover:text-white transition-colors" href="#">Maritime domain awareness</a>
+<a class="hover:text-white transition-colors" href="#">Deforestation</a>
+<a class="hover:text-white transition-colors" href="#">Sea ice</a>
+<a class="text-white font-medium border-b border-white pb-0.5" href="#">Oil spills</a>
+</nav>
+</div>
+<!-- Right Nav Links & Tools -->
+<div class="flex items-center gap-7 text-sm font-normal text-white">
+<nav class="hidden md:flex items-center gap-7 tracking-tight">
+<a class="hover:text-gray-200 transition-colors" href="#overview">Use cases</a>
+<a class="hover:text-gray-200 transition-colors" href="#features">Data &amp; Constellation</a>
+<a class="hover:text-gray-200 transition-colors" href="#sar-analysis">Forensic Pipeline</a>
+<a class="hover:text-gray-200 transition-colors" href="#legal">Legal Dossier</a>
+</nav>
+<div class="flex items-center gap-4">
+<button aria-label="Search" class="p-1 hover:text-gray-300 transition-colors text-white">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<a class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-black hover:bg-gray-100 transition-all rounded" href="#launch-console">
+            Launch Console
+          </a>
+<button aria-label="Menu" class="p-1 hover:text-gray-300 transition-colors text-white lg:hidden">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- 2. HERO SECTION (ICEYE EXACT FULL-BLEED OCEAN BACKGROUND & TYPOGRAPHY) -->
+<section class="relative w-full min-h-[90vh] md:min-h-screen flex flex-col justify-between pt-36 pb-20 overflow-hidden bg-[#07131D]">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<img alt="Aerial marine oil spill and containment vessel in deep ocean" class="w-full h-full object-cover object-center brightness-95 contrast-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4STtKktPWLRzxdP2drv5yebYT4WFHMq2JciI3JFakFlMjNPKZYfgyuGaoWz_cthwgt_BCFg1ZR9yw4cy93uB2hfPkDHo5NyH_2ftfug9kl91yNWu7ba_VI9TMSqY0p1xerOrmwl1QwipGm2wKnbGiBttAV8oiAnIvzUMqmr3A_8f7SUzATILjR4XiNKejjWMYpuOyZcJqkF3MDDu04aQTStlnzCv5sPv8l1R1_BlonkSuPKOK7HKwLSBn-9dbuC8tX_E"/>
+<!-- Soft gradient overlay for immaculate legibility -->
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/40"></div>
+</div>
+<!-- Category sub-nav (as seen on ICEYE screenshots) -->
+<div class="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 hidden lg:flex items-center gap-8 text-[13px] text-gray-300 pb-8">
+<a class="hover:text-white transition-colors" href="#">Border</a>
+<a class="hover:text-white transition-colors" href="#">Site activity</a>
+<a class="hover:text-white transition-colors" href="#">Port</a>
+<a class="hover:text-white transition-colors" href="#">Maritime domain awareness</a>
+<a class="hover:text-white transition-colors" href="#">Deforestation</a>
+<a class="hover:text-white transition-colors" href="#">Sea ice</a>
+<span class="text-white font-medium">Oil spills</span>
+</div>
+<!-- Main Hero Text Content -->
+<div class="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 my-auto">
+<div class="max-w-2xl text-white space-y-4">
+<p class="text-[12px] font-semibold uppercase tracking-[0.2em] text-gray-300 font-mono">
+          USE CASES / MARITIME ATTRIBUTION
+        </p>
+<h1 class="text-6xl sm:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-tight">
+          Oil spills
+        </h1>
+<p class="text-lg sm:text-xl lg:text-2xl font-normal text-gray-100/90 leading-snug tracking-tight max-w-xl pt-2">
+          Rapidly react to and respond to marine oil spills and oil seeps in coastal waters and vast sea areas far from the shore.
+        </p>
+<div class="pt-6 flex flex-wrap items-center gap-4">
+<a class="inline-flex items-center px-6 py-3.5 bg-white text-black text-xs uppercase tracking-widest font-semibold hover:bg-gray-100 transition-colors rounded" href="#sar-analysis">
+            View Forensic Data Case
+          </a>
+<a class="inline-flex items-center px-6 py-3.5 border border-white/40 text-white text-xs uppercase tracking-widest font-semibold hover:bg-white/10 transition-colors rounded" href="#overview">
+            Platform Capabilities ↓
+          </a>
+</div>
+</div>
+</div>
+<!-- Footnote / Coordinate bar -->
+<div class="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 pt-10">
+<div class="flex flex-wrap items-center justify-between text-xs text-gray-300 font-mono border-t border-white/15 pt-4">
+<span>SAR CONSTELLATION: ACTIVE HIGH-REVISIT</span>
+<span>LAT: 05°42'18"N | LON: 080°12'45"E</span>
+<span class="text-white">UNCLOS PART XII ENFORCEMENT</span>
+</div>
+</div>
+</section>
+<!-- 3. EDITORIAL LIGHT SECTION (EXACT ICEYE 3-COLUMN VALUE GRID) -->
+<section class="w-full bg-white py-24 lg:py-32 text-black" id="overview">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+<!-- Editorial Section Heading matching screenshot ICEYE #5 -->
+<div class="max-w-4xl mb-16 lg:mb-20">
+<h2 class="text-4xl sm:text-5xl lg:text-[56px] font-normal tracking-tight leading-[1.1] text-black">
+          Why choose ARGUS for oil spill monitoring &amp; forensic attribution?
+        </h2>
+</div>
+<!-- 2 Rows x 3 Columns Value Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 gap-y-14 lg:gap-y-16">
+<!-- Item 1 -->
+<div class="space-y-3">
+<h3 class="text-xl sm:text-[22px] font-semibold tracking-tight text-black">
+            Forensic-level detection
+          </h3>
+<p class="text-base text-[#4a5568] leading-relaxed font-normal">
+            Image locations of interest daily and detect changes at an accuracy level impossible with traditional optical satellites.
+          </p>
+</div>
+<!-- Item 2 -->
+<div class="space-y-3">
+<h3 class="text-xl sm:text-[22px] font-semibold tracking-tight text-black">
+            Unequaled visibility
+          </h3>
+<p class="text-base text-[#4a5568] leading-relaxed font-normal">
+            Get high-resolution visibility into any area in or around your waters, day or night, through clouds, fog, and darkness.
+          </p>
+</div>
+<!-- Item 3 -->
+<div class="space-y-3">
+<h3 class="text-xl sm:text-[22px] font-semibold tracking-tight text-black">
+            Actionable intelligence
+          </h3>
+<p class="text-base text-[#4a5568] leading-relaxed font-normal">
+            Get reliable data for early detection and response to oil spills. Timely intelligence makes it easier to determine how large a response you should send to the site.
+          </p>
+</div>
+<!-- Item 4 -->
+<div class="space-y-3">
+<h3 class="text-xl sm:text-[22px] font-semibold tracking-tight text-black">
+            Flexible monitoring
+          </h3>
+<p class="text-base text-[#4a5568] leading-relaxed font-normal">
+            Monitor offshore areas according to your needs. Get a single image of an area of up to 50,000 km² or zoom in to areas down to less than a meter.
+          </p>
+</div>
+<!-- Item 5 -->
+<div class="space-y-3">
+<h3 class="text-xl sm:text-[22px] font-semibold tracking-tight text-black">
+            Probabilistic attribution
+          </h3>
+<p class="text-base text-[#4a5568] leading-relaxed font-normal">
+            Reconstruct 50%, 80%, and 95% backward Lagrangian drift confidence envelopes to correlate dark-vessel AIS dropouts with legal certainty.
+          </p>
+</div>
+<!-- Item 6 -->
+<div class="space-y-3">
+<h3 class="text-xl sm:text-[22px] font-semibold tracking-tight text-black">
+            Trusted partner
+          </h3>
+<p class="text-base text-[#4a5568] leading-relaxed font-normal">
+            ARGUS is engineered with an honest 'INCONCLUSIVE' protocol for international maritime courtrooms, meeting UNCLOS and MARPOL evidentiary standards.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. CRISP SAR SATELLITE COMPARISON & TECHNICAL APPLICATION STUDY -->
+<section class="w-full bg-[#f7f8f9] py-24 lg:py-32 border-t border-[#e5e7eb]" id="sar-analysis">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+<!-- Headline & Subtitle -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+<div class="max-w-3xl space-y-3">
+<p class="text-xs uppercase tracking-widest font-mono text-gray-500 font-medium">SAR Imagery &amp; Anomaly Extraction</p>
+<h2 class="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-black">
+            Detect and respond to coastal discharges
+          </h2>
+<p class="text-base sm:text-lg text-text-muted leading-relaxed font-normal">
+            High-resolution SAR backscatter reveals capillary wave dampening caused by hydrocarbons. In this capture, ARGUS automatically isolates discharge boundaries along the archipelago coastline.
+          </p>
+</div>
+<div class="flex items-center gap-3 shrink-0 font-mono text-xs text-gray-600">
+<span class="inline-block w-2 h-2 bg-emerald-500 rounded-full"></span>
+<span>COPERNICUS SENTINEL-1A C-BAND</span>
+</div>
+</div>
+<!-- SAR Feature Image Card with Real Clean Callouts (IMAGE_3) -->
+<div class="relative w-full rounded-lg overflow-hidden bg-black shadow-xl border border-gray-200">
+<img alt="Synthetic Aperture Radar satellite image displaying oil spill extent and damaged bulk carrier" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpXSnyp2dipSK6YFnpEo0ACdb3PBLT541UH4x2TWynBD2tTzakkb1y_vWP3Jk7l-VooExP9Cr9I5MmXDTsZ34MW4cK3SXGneTpqJVXrWNNb2v1tPDwlkPZTaTq5pMDxzXCuP-_eVj1GfnLhhm8KvemhpIvlMuDLxOsO55nvhQjLBcjcb5BhzFR8SU8jsEq7szxskB6TBmT2z2PKfThdKtlcUyuTei_x25yM5VCZoRsCDN8LWOnGpiuFeEJIUahCxsWWjE"/>
+<!-- Bottom Technical Spec Overlay -->
+<div class="bg-[#111827] text-white px-6 py-4 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+<div><span class="text-gray-400">TARGET:</span> MV WAKASHIO REEF INCIDENT</div>
+<div><span class="text-gray-400">RESOLUTION:</span> 10m SPATIAL / C-BAND VV+VH</div>
+<div><span class="text-gray-400">SURFACE EXTENT:</span> ~27.4 km² DAMPING ZONE</div>
+<div class="text-emerald-400 font-semibold">ATTRIBUTED KEEL CONFIRMED</div>
+</div>
+</div>
+<!-- Ruled-out look-alikes panel (Scientific Integrity) -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 bg-white rounded border border-[#e2e5e9] space-y-2">
+<div class="flex items-center justify-between text-xs font-mono font-medium">
+<span class="text-gray-900">Biogenic Surfactant Film</span>
+<span class="text-emerald-600">RULED OUT</span>
+</div>
+<p class="text-xs text-gray-500 leading-relaxed">
+            Multi-frequency cross-polarization ratio excludes organic phytoplankton oils; dampening gradient indicates dense heavy bunker crude.
+          </p>
+</div>
+<div class="p-6 bg-white rounded border border-[#e2e5e9] space-y-2">
+<div class="flex items-center justify-between text-xs font-mono font-medium">
+<span class="text-gray-900">Low-Wind Calm Water</span>
+<span class="text-emerald-600">RULED OUT</span>
+</div>
+<p class="text-xs text-gray-500 leading-relaxed">
+            ECMWF ERA5 surface wind recorded at 7.8 m/s at pass timestamp. Well above the 3.0 m/s threshold required for natural specular pooling.
+          </p>
+</div>
+<div class="p-6 bg-white rounded border border-[#e2e5e9] space-y-2">
+<div class="flex items-center justify-between text-xs font-mono font-medium">
+<span class="text-gray-900">Vessel Kelvin Wake</span>
+<span class="text-emerald-600">RULED OUT</span>
+</div>
+<p class="text-xs text-gray-500 leading-relaxed">
+            Slick perimeter geometry diverges from hydrodynamic ship wake propagation angles. Continuous advection confirmed by backward drift model.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. EVIDENTIARY PROCESS / WORKFLOW (CLEAN ICEYE ENTERPRISE STYLE) -->
+<section class="w-full bg-white py-24 border-t border-gray-200" id="features">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+<div class="max-w-3xl mb-16 space-y-3">
+<p class="text-xs uppercase tracking-widest font-mono text-gray-500 font-medium">End-to-End Forensics</p>
+<h2 class="text-3xl sm:text-4xl font-normal tracking-tight text-black">
+          From radar capture to courtroom deposition
+        </h2>
+<p class="text-base text-text-muted leading-relaxed">
+          Standard satellite detection is circumstantial. ARGUS couples high-revisit SAR with time-reversed Lagrangian particle tracing to prove beyond reasonable doubt which keel released the hydrocarbon.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="border-t-2 border-black pt-6 space-y-2">
+<span class="font-mono text-xs font-bold text-gray-400">01</span>
+<h4 class="text-lg font-semibold text-black">SAR Ingestion</h4>
+<p class="text-sm text-gray-600 leading-relaxed">Continuous ingest of radar imagery regardless of cloud cover, smoke plumes, or night conditions.</p>
+</div>
+<div class="border-t-2 border-black pt-6 space-y-2">
+<span class="font-mono text-xs font-bold text-gray-400">02</span>
+<h4 class="text-lg font-semibold text-black">Hydrodynamic Reversal</h4>
+<p class="text-sm text-gray-600 leading-relaxed">Back-calculating 50,000 ocean particles via Copernicus GLORYS12 currents and ECMWF atmospheric forcing.</p>
+</div>
+<div class="border-t-2 border-black pt-6 space-y-2">
+<span class="font-mono text-xs font-bold text-gray-400">03</span>
+<h4 class="text-lg font-semibold text-black">AIS Kinematics &amp; Spoofing</h4>
+<p class="text-sm text-gray-600 leading-relaxed">Identifying vessels transiting origin contours and unmasking deliberate AIS blackouts via SAR wake blips.</p>
+</div>
+<div class="border-t-2 border-black pt-6 space-y-2">
+<span class="font-mono text-xs font-bold text-gray-400">04</span>
+<h4 class="text-lg font-semibold text-black">Tamper-Proof Dossier</h4>
+<p class="text-sm text-gray-600 leading-relaxed">SHA-256 encrypted forensic evidence package admissible under UNCLOS Article 220 and MARPOL Annex I.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. INTERACTIVE LAUNCH CTA BANNER -->
+<section class="w-full bg-[#07131D] text-white py-20 border-t border-gray-800" id="launch-console">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+<div class="max-w-2xl space-y-3">
+<p class="text-xs uppercase tracking-widest font-mono text-cyan-400 font-semibold">Ready for operational deployment</p>
+<h2 class="text-3xl sm:text-4xl font-normal tracking-tight text-white">
+          Access the ARGUS Investigation Console
+        </h2>
+<p class="text-base text-gray-300 leading-relaxed">
+          Inspect live oceanic radar feeds, run hindcast origin simulations, and generate legal evidence dossiers for sovereign maritime authorities.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-4 shrink-0">
+<a class="inline-flex items-center justify-center px-8 py-4 bg-white text-black text-xs uppercase tracking-widest font-bold hover:bg-gray-200 transition-colors rounded" href="#">
+          Launch Investigation Console →
+        </a>
+<a class="inline-flex items-center justify-center px-8 py-4 border border-gray-600 text-white text-xs uppercase tracking-widest font-bold hover:bg-white/10 transition-colors rounded" href="#">
+          Schedule Operational Demo
+        </a>
+</div>
+</div>
+</section>
+<!-- 7. MINIMAL ENTERPRISE FOOTER -->
+<footer class="w-full bg-black text-white py-16 border-t border-gray-900 font-sans text-xs" id="legal">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-10 pb-16 border-b border-gray-800">
+<!-- Brand col -->
+<div class="md:col-span-2 space-y-4">
+<div class="text-xl font-bold tracking-widest font-sans">ARGUS</div>
+<p class="text-gray-400 text-xs leading-relaxed max-w-sm">
+            Autonomous SAR ocean surveillance, hydrodynamic backtracking, and vessel attribution compliant with UNCLOS Article 220 &amp; ISO/IEC 27037 standards.
+          </p>
+<div class="font-mono text-[11px] text-gray-500">
+            SYSTEM STATUS: SATELLITE NODES OPERATIONAL
+          </div>
+</div>
+<!-- Links col 1 -->
+<div class="space-y-3">
+<h5 class="text-white font-medium uppercase tracking-wider text-[11px]">Solutions</h5>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition-colors" href="#">Oil spill detection</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Dark vessel tracking</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Lagrangian drift modeling</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Courtroom evidence packets</a></li>
+</ul>
+</div>
+<!-- Links col 2 -->
+<div class="space-y-3">
+<h5 class="text-white font-medium uppercase tracking-wider text-[11px]">Data Constellations</h5>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition-colors" href="#">Copernicus Sentinel-1A/B</a></li>
+<li><a class="hover:text-white transition-colors" href="#">ECMWF ERA5 Wind Vectors</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Copernicus GLORYS12 Currents</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Spire &amp; GFW Global AIS</a></li>
+</ul>
+</div>
+<!-- Links col 3 -->
+<div class="space-y-3">
+<h5 class="text-white font-medium uppercase tracking-wider text-[11px]">Compliance</h5>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition-colors" href="#">UNCLOS Maritime Directive</a></li>
+<li><a class="hover:text-white transition-colors" href="#">MARPOL Annex I Protocols</a></li>
+<li><a class="hover:text-white transition-colors" href="#">ISO/IEC 27037 Chain-of-Custody</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Responsible AI Protocol</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-gray-500 text-[11px] gap-4">
+<div>© 2025 ARGUS INTELLIGENCE PLATFORM. ALL RIGHTS RESERVED.</div>
+<div class="flex items-center gap-6 font-mono">
+<span>PRIVACY POLICY</span>
+<span>TERMS OF SERVICE</span>
+<span>SECURITY DISCLOSURE</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
